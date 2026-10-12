@@ -1,0 +1,24 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Helm packaging
+*.tgz
+
+# Local env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Logs
+*.log
+
+# Kubernetes local state
+# optional if you generate manifests locally

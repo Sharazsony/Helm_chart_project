@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "three-tier-app.frontend.htmlConfigMapName" . }}
+  labels:
+    {{- include "three-tier-app.labels" . | nindent 4 }}
+    app.kubernetes.io/component: frontend
+data:
+  index.html: |
+    <html>
+      <head>
+        <title>3-Tier App</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f6f8fa;
+          }
+          .box {
+            border: 1px solid #d0d7de;
+            border-radius: 10px;
+            background: #ffffff;
+            padding: 24px;
+            max-width: 700px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          }
+        </style>
+      </head>
+      <body>
+        <div class="box">
+          <h1>Frontend is running successfully</h1>
+          <p>Backend URL: http://{{ include "three-tier-app.backend.fullname" . }}:{{ .Values.backend.service.port }}</p>
+          <p>Database service: {{ include "three-tier-app.postgres.fullname" . }}:{{ .Values.postgres.service.port }}</p>
+        </div>
+      </body>
+    </html>

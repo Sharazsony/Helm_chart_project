@@ -1,0 +1,15 @@
+apiVersion: v2
+name: three-tier-app
+description: Production-friendly 3-tier application stack using public container images
+type: application
+version: 1.0.0
+appVersion: "1.0"
+keywords:
+  - helm
+  - three-tier
+  - nginx
+  - postgres
+home: https://helm.sh/
+maintainers:
+  - name: DevOps Team
+    email: devops@example.com

@@ -1,0 +1,73 @@
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  labels: {}
+
+frontend:
+  image:
+    repository: nginx
+    tag: "1.27-alpine"
+    pullPolicy: IfNotPresent
+  replicas: 1
+  containerPort: 80
+  service:
+    type: ClusterIP
+    port: 80
+  podAnnotations: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  resources: {}
+
+backend:
+  image:
+    repository: kennethreitz/httpbin
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  replicas: 1
+  containerPort: 80
+  service:
+    type: ClusterIP
+    port: 80
+  podAnnotations: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  resources: {}
+
+postgres:
+  image:
+    repository: postgres
+    tag: "16-alpine"
+    pullPolicy: IfNotPresent
+  replicas: 1
+  containerPort: 5432
+  service:
+    type: ClusterIP
+    port: 5432
+  username: myuser
+  password: ""
+  database: mydb
+  existingSecret: "myapp-three-tier-app-postgres-secret"
+  podAnnotations: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  resources: {}
+  persistence:
+    enabled: true
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+    storageClass: ""
+    existingClaim: ""
+
+ingress:
+  enabled: true
+  className: nginx
+  host: app.local
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+  tls: []
+
